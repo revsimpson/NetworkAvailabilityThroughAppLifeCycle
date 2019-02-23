@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import Network
- 
+
 final class NetWorkAvailableService: ApplicationService {
     
     func start() {
@@ -20,12 +20,15 @@ final class NetWorkAvailableService: ApplicationService {
                 let networkType : String = path.isExpensive ? "with cellular data or wifi through a hotspot" : ""
                 let alert = UIAlertController(title: "Nice!", message: "You have internet... \(networkType)", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
-                UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
-                
+                DispatchQueue.main.async {
+                    UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+                }
             } else {
                 let alert = UIAlertController(title: "Warning!", message: "You do not have internet at the moment...", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
-                UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+                }
             }
         }
         
